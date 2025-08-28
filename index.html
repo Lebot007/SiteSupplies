@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Supplies - Conserto e manutenção de impressoras Samsung (M4020, M4070). Toners originais e compatíveis. Atendimento via WhatsApp +55 31 99645-6583.">
+    <meta name="theme-color" content="#0b63c6">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Supplies - Especialistas em Impressoras Samsung">
+    <meta property="og:description" content="Conserto e manutenção de impressoras Samsung (M4020, M4070). Toners originais e compatíveis.">
+    <meta property="og:image" content="favicon.svg">
+    <meta property="og:type" content="website">
+    <title>Supplies - Especialistas em Impressoras Samsung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    :root { --vh: 1vh; }
+    /* Global fixes to avoid mobile overflow/white stripe */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+    img { max-width: 100%; height: auto; display: block; }
+    .printer-model {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .service-card:hover .overlay {
+            opacity: 1;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .rotate-3d {
+            animation: rotate3d 15s infinite linear;
+        }
+        
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        /* Responsive tweaks */
+        @media (max-width: 1024px) {
+            .printer-model { height: 300px; }
+            .overlay { background: rgba(0,0,0,0.6); }
+            .text-4xl { font-size: 2rem; }
+        }
+
+        /* Tablet landscape tweaks (768-1024) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            section#home { height: 70vh; }
+            .service-card { min-height: 420px; }
+            .text-4xl { font-size: 2.25rem; }
+        }
+
+        @media (max-width: 640px) {
+            .printer-model { height: 220px; }
+            .whatsapp-float { width: 52px; height: 52px; bottom: 24px; right: 16px; font-size: 26px; }
+            .text-4xl { font-size: 1.5rem; }
+            .container { padding-left: 1rem; padding-right: 1rem; }
+        }
+        /* Parallax fallback: avoid fixed background on smaller screens (iOS/Android issues) */
+        @media (max-width: 1024px) {
+            .parallax { background-attachment: scroll; }
+        }
+    /* Use CSS variable --vh to set hero height precisely on mobile */
+    section#home { height: calc(var(--vh, 1vh) * 100); overflow: hidden; }
+    /* Reveal animation used by IntersectionObserver */
+    .reveal { opacity: 1 !important; transform: translateY(0) !important; transition: opacity 400ms ease-out, transform 400ms ease-out; }
+    .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip-link:focus { left: 0; top: 0; width: auto; height: auto; background: #fff; color: #000; padding: 8px 12px; z-index: 60; }
+    a:focus-visible { outline: 3px solid rgba(11,99,198,0.5); outline-offset: 2px; }
+    /* Hero particles canvas */
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    /* ensure hero content stays above canvas */
+    #home .container { position: relative; z-index: 10; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <a href="#home" class="skip-link sr-only focus:not-sr-only">Ir para o conteúdo</a>
+
+    <noscript>
+        <div class="bg-yellow-100 text-yellow-800 p-2 text-center">Algumas funcionalidades podem ficar limitadas sem JavaScript. Para melhor experiência, habilite JavaScript.</div>
+    </noscript>
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-print text-blue-900 text-2xl"></i>
+                    </div>
+                    <span class="font-bold text-xl">Supplies</span>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-blue-300 transition">Home</a>
+                    <a href="#services" class="hover:text-blue-300 transition">Serviços</a>
+                    <a href="#products" class="hover:text-blue-300 transition">Produtos</a>
+                    <a href="#about" class="hover:text-blue-300 transition">Sobre</a>
+                    <a href="#contact" class="hover:text-blue-300 transition">Contato</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#home" class="block py-2 hover:bg-blue-800 px-4 rounded">Home</a>
+                <a href="#services" class="block py-2 hover:bg-blue-800 px-4 rounded">Serviços</a>
+                <a href="#products" class="block py-2 hover:bg-blue-800 px-4 rounded">Produtos</a>
+                <a href="#about" class="block py-2 hover:bg-blue-800 px-4 rounded">Sobre</a>
+                <a href="#contact" class="block py-2 hover:bg-blue-800 px-4 rounded">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="container mx-auto px-4 z-10 relative">
+                <div class="max-w-3xl mx-auto text-center bg-black bg-opacity-70 p-8 rounded-xl">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Especialistas em Impressoras <span class="text-blue-400">Samsung</span></h1>
+                <p class="text-xl text-gray-300 mb-8">Consertos especializados nos modelos M4020 e M4070. Venda de toners originais e compatíveis.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition transform hover:scale-105" aria-label="Abrir WhatsApp">
+                        <i class="fab fa-whatsapp mr-2"></i> WhatsApp: +55 31 99645-6583
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#services" class="text-white text-4xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos <span class="text-blue-600">Serviços</span></h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Especializados em conserto e manutenção de impressoras Samsung, oferecemos serviços de qualidade com garantia.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="m4020.jpg" loading="lazy"
+                             alt="Conserto de Impressora" class="w-full h-full object-cover">
+                        <div class="overlay">
+                                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Conserto%20Samsung%20M4020." target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                                Saiba Mais
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Conserto Samsung M4020</h3>
+                        <p class="text-gray-600 mb-4">Serviço especializado para a impressora Samsung M4020 com peças originais e garantia.</p>
+                        <div class="flex items-center text-yellow-500 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 ml-2">(45 avaliações)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="m4070.jpg" loading="lazy"
+                             alt="Conserto de Impressora" class="w-full h-full object-cover">
+                        <div class="overlay">
+                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Conserto%20Samsung%20M4070." target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                                Saiba Mais
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Conserto Samsung M4070</h3>
+                        <p class="text-gray-600 mb-4">Reparo técnico especializado para a impressora Samsung M4070 com diagnóstico preciso.</p>
+                        <div class="flex items-center text-yellow-500 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-gray-600 ml-2">(32 avaliações)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="manutencao.jpg" loading="lazy"
+                             alt="Manutenção Preventiva" class="w-full h-full object-cover">
+                        <div class="overlay">
+                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Manuten%C3%A7%C3%A3o%20Preventiva." target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                                Saiba Mais
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Manutenção Preventiva</h3>
+                        <p class="text-gray-600 mb-4">Serviço de limpeza e ajustes para prolongar a vida útil da sua impressora e evitar problemas.</p>
+                        <div class="flex items-center text-yellow-500 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-gray-600 ml-2">(28 avaliações)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Info Section -->
+    <section id="products" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Toners para Impressoras <span class="text-blue-600">Samsung</span></h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Comercializamos toners originais e compatíveis para os modelos M4020 e M4070.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Toners Originais</h3>
+                        <p class="text-gray-600 mb-4">
+                            Garantia de qualidade e desempenho com produtos originais Samsung.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Alta qualidade de impressão</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Maior rendimento</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Garantia Samsung</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Toners Compatíveis</h3>
+                        <p class="text-gray-600 mb-4">
+                            Excelente custo-benefício com qualidade comprovada.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Preço mais acessível</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Testados e aprovados</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Garantia Supplies</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                        Entre em contato para mais informações
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Sobre a <span class="text-blue-600">Supplies</span></h2>
+                    <div class="w-20 h-1 bg-blue-600 mb-6"></div>
+                    <p class="text-gray-600 mb-6">
+                        A Supplies é especializada em conserto e manutenção de impressoras Samsung, com foco nos modelos M4020 e M4070. 
+                        Nossa equipe técnica possui mais de 10 anos de experiência no mercado, garantindo serviços de qualidade e peças originais.
+                    </p>
+                    <p class="text-gray-600 mb-8">
+                        Além dos serviços técnicos, comercializamos toners originais e compatíveis com a melhor relação custo-benefício do mercado, 
+                        sempre priorizando a satisfação dos nossos clientes.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center bg-blue-50 px-4 py-3 rounded-lg">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-check-circle text-blue-600"></i>
+                            </div>
+                            <span class="font-semibold">Garantia em todos os serviços</span>
+                        </div>
+                        <div class="flex items-center bg-blue-50 px-4 py-3 rounded-lg">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-truck text-blue-600"></i>
+                            </div>
+                            <span class="font-semibold">Entrega rápida</span>
+                        </div>
+                    </div>
+                </div>
+                
+                    <div class="lg:w-1/2 relative">
+                    <div class="bg-blue-600 rounded-xl overflow-hidden shadow-2xl floating">
+                    <img src="sobre.jpg" 
+                        alt="Equipe Supplies" class="w-full h-auto object-cover">
+                    </div>
+                    
+                    <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-lg hidden md:block">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-4 rounded-full mr-4">
+                                <i class="fas fa-headset text-blue-600 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Suporte Especializado</h4>
+                                <p class="text-gray-600 text-sm">Atendimento personalizado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-900 text-white parallax" style="background-image: url('final.jpg');">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">O que dizem <span class="text-blue-400">nossos clientes</span></h2>
+                <div class="w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">Avaliações reais de clientes que utilizaram nossos serviços e produtos.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Levei minha Samsung M4020 para conserto na Supplies e fiquei impressionado com o atendimento e qualidade do serviço. Minha impressora voltou a funcionar perfeitamente e ainda me orientaram sobre cuidados preventivos."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+                            <img src="m4020.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Carlos Silva</h4>
+                            <p class="text-sm text-gray-400">Empresa ABC</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Comprei toner compatível para minha M4070 e estou muito satisfeita. A qualidade da impressão é ótima e o preço muito abaixo do mercado. Recomendo a Supplies para todos que precisam de produtos para impressora."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+                            <img src="m4070.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Ana Oliveira</h4>
+                            <p class="text-sm text-gray-400">Escritório Contábil</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Contratei o serviço de manutenção preventiva para nossas 5 impressoras M4020 e foi a melhor decisão. Reduzimos em 80% os problemas que tínhamos antes. Equipe muito profissional e atenciosa."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+                            <img src="manutencao.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Roberto Santos</h4>
+                            <p class="text-sm text-gray-400">Escola Municipal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Informational only) -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contato</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Somente informações de contato. Para falar conosco, utilize o WhatsApp ou ligue para o número abaixo.</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Telefone</h3>
+                    <p class="text-gray-700 text-lg mb-6"><a href="tel:+5531996456583" class="text-gray-800 font-semibold">+55 31 99645-6583</a></p>
+                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" class="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition" aria-label="Abrir WhatsApp">
+                        <i class="fab fa-whatsapp mr-2"></i> Abrir WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-print text-blue-900 text-2xl"></i>
+                        </div>
+                        <span class="font-bold text-xl">Supplies</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Especialistas em conserto e manutenção de impressoras Samsung, com foco nos modelos M4020 e M4070.</p>
+                    <!-- social links removed as requested -->
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Serviços</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition">Produtos</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">Sobre</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Serviços</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Conserto M4020</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Conserto M4070</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Manutenção Preventiva</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Venda de Toners</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Assistência Técnica</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Contato</h4>
+                    <p class="text-gray-400 mb-4">Telefone: <strong><a href="tel:+5531996456583" class="text-gray-200 underline">+55 31 99645-6583</a></strong></p>
+                    <p class="text-gray-400">WhatsApp: <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="text-gray-200 underline">Abrir conversa</a></p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p id="footer-year" class="text-gray-400 mb-4 md:mb-0">© <span id="year">2023</span> Supplies. Todos os direitos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Termos de Serviço</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+        <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+
+                    // Close mobile menu if open and sync aria state
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    const mobileBtn = document.getElementById('mobile-menu-button');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        if(mobileBtn) mobileBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+
+        // Lightweight reveal on scroll using IntersectionObserver
+        document.addEventListener('DOMContentLoaded', function() {
+            const revealElements = document.querySelectorAll('.service-card, .service-card img, .bg-blue-600 img, .bg-gray-800 img');
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            revealElements.forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-6');
+                io.observe(el);
+            });
+        });
+    // Set footer year dynamically
+    (function(){ const y = new Date().getFullYear(); const el = document.getElementById('year'); if(el) el.textContent = y; })();
+    </script>
+    <script>
+    // Fix mobile 100vh issue and avoid right-side white stripe
+    (function(){
+        function setVh(){
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', vh + 'px');
+        }
+        setVh();
+        window.addEventListener('resize', () => { clearTimeout(window._vhResize); window._vhResize = setTimeout(setVh, 120); });
+
+        // prevent subpixel rounding causing right-side white stripe
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
+        const hero = document.getElementById('home');
+        if(hero) hero.style.minWidth = '100%';
+    })();
+    </script>
+    <script>
+    // Enhanced particles for hero background (more visible, themed color)
+    (function(){
+        const canvas = document.getElementById('hero-canvas');
+        if(!canvas) return;
+
+        // Respect reduced motion
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(prefersReduced) { canvas.style.display = 'none'; return; }
+
+        const ctx = canvas.getContext('2d');
+        const deviceRatio = window.devicePixelRatio || 1;
+
+        // compute size using bounding rect to ensure full coverage, and use CSS var --vh for mobile 100vh issues
+        function setSize(){
+            const rect = canvas.getBoundingClientRect();
+            const w = Math.max(1, Math.floor(rect.width));
+            const h = Math.max(1, Math.floor(rect.height));
+            canvas.width = Math.max(1, Math.floor(w * deviceRatio));
+            canvas.height = Math.max(1, Math.floor(h * deviceRatio));
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+            ctx.setTransform(deviceRatio,0,0,deviceRatio,0,0);
+            return {w,h};
+        }
+
+        // particle system state
+        let state = { particles: [], w: 0, h: 0, isMobile: false };
+
+        function rand(min, max){ return Math.random()*(max-min)+min }
+        const color = { r: 157, g: 209, b: 255 };
+
+        function initParticles(w,h){
+            state.isMobile = window.innerWidth < 640;
+            // density based on area, with a min/max cap
+            const area = w*h;
+            const base = Math.min(120, Math.max(36, Math.floor(area / 16000))); // tuned density
+            const count = state.isMobile ? Math.max(base, 48) : base;
+            state.particles = [];
+            for(let i=0;i<count;i++){
+                state.particles.push({ x: rand(0,w), y: rand(0,h), r: rand(0.9,2.6), vx: rand(-0.36,0.36), vy: rand(-0.12,0.12), alpha: rand(0.28,0.85) });
+            }
+        }
+
+        let rafId = null;
+        function resizeAndReinit(){
+            const size = setSize(); state.w = size.w; state.h = size.h; initParticles(state.w, state.h);
+        }
+
+        // Observe size changes precisely
+        const ro = new ResizeObserver(() => { clearTimeout(window._heroResize); window._heroResize = setTimeout(resizeAndReinit, 80); });
+        ro.observe(canvas);
+
+        // Initialize
+        resizeAndReinit();
+
+        function draw(){
+            const w = state.w, h = state.h;
+            ctx.clearRect(0,0,w,h);
+
+            // move & draw particles
+            for(let i=0;i<state.particles.length;i++){
+                const p = state.particles[i];
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < -10) p.x = w + 10;
+                if(p.x > w + 10) p.x = -10;
+                if(p.y < -10) p.y = h + 10;
+                if(p.y > h + 10) p.y = -10;
+
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${p.alpha})`;
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+                ctx.fill();
+            }
+
+            // connecting lines
+            const maxDist = state.isMobile ? 120 : 180;
+            for(let i=0;i<state.particles.length;i++){
+                for(let j=i+1;j<state.particles.length;j++){
+                    const a = state.particles[i]; const b = state.particles[j];
+                    const dx = a.x-b.x, dy = a.y-b.y;
+                    const dist = Math.sqrt(dx*dx+dy*dy);
+                    if(dist < maxDist){
+                        const alpha = (1 - dist/maxDist) * 0.18;
+                        ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${alpha})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+                    }
+                }
+            }
+
+            rafId = requestAnimationFrame(draw);
+        }
+
+        draw();
+    })();
+    </script>
+</body>
+</html>

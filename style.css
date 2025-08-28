@@ -1,0 +1,7 @@
+/* Minimal custom CSS to complement Tailwind utilities */
+body { min-height: 100vh; }
+
+/* Keep legacy card styles if used elsewhere */
+.card { max-width: 620px; margin: 0 auto; padding: 16px; border: 1px solid lightgray; border-radius: 16px; }
+
+.card p:last-child { margin-bottom: 0; }
