@@ -52,6 +52,9 @@
             opacity: 1;
             pointer-events: auto; /* allow clicks when visible */
         }
+
+    /* also reveal overlay when a focusable child receives focus (keyboard / accessibility / touch) */
+    .service-card:focus-within .overlay { opacity: 1; pointer-events: auto; }
         
         .floating {
             animation: floating 3s ease-in-out infinite;
@@ -215,6 +218,15 @@
 
     /* defensive: ensure hero cannot create horizontal overflow */
     #home, #home * { box-sizing: border-box; }
+    /* Prevent selection/copy of any content inside the hero/home area */
+    #home, #home * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
     /* Hero particles canvas: above background image but behind text */
     #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
@@ -230,7 +242,17 @@
         text-align: center;
     }
     /* Title and CTA adjustments for readability when black box removed */
-    .hero-title { text-shadow: 0 6px 18px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.6); }
+    .hero-title {
+        text-shadow: 0 6px 18px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.6);
+        /* prevent selection/copy on desktop and mobile */
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: default;
+    }
     .hero-sub { text-shadow: 0 4px 12px rgba(0,0,0,0.45); }
     .hero-cta { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); }
     .hero-cta:hover { background: rgba(255,255,255,0.12); }
@@ -295,6 +317,9 @@
     }
     .service-card img { position: relative; z-index: 0; }
     .service-card .overlay { z-index: 2; }
+    /* ensure overlays are above other decorations and their anchors accept clicks reliably */
+    .service-card .overlay { z-index: 60; }
+    .service-card .overlay a { z-index: 61; pointer-events: auto; }
     .service-card .p-6, .service-card .p-6 * { color: inherit; }
     /* slightly deeper for true-white elements when needed */
     .soften-card--light { background-color: rgba(255,255,255,0.98) !important; }
@@ -473,7 +498,7 @@
                     <div class="relative h-48 overflow-hidden">
                     <img src="m4020.jpg" loading="lazy"
                         alt="Impressora Samsung M4020" class="w-full h-full object-cover">
-                        <div class="overlay">
+                        <div class="overlay" role="dialog" aria-hidden="true">
                                     <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4020." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
                             </a>
@@ -498,7 +523,7 @@
                     <div class="relative h-48 overflow-hidden">
                     <img src="m4070.jpg" loading="lazy"
                         alt="Impressora Samsung M4070" class="w-full h-full object-cover">
-                        <div class="overlay">
+                        <div class="overlay" role="dialog" aria-hidden="true">
                             <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4070." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
                             </a>
@@ -523,7 +548,7 @@
                     <div class="relative h-48 overflow-hidden">
                         <img src="manutencao.jpg" loading="lazy"
                              alt="Locação com Suporte Técnico" class="w-full h-full object-cover">
-                        <div class="overlay">
+                        <div class="overlay" role="dialog" aria-hidden="true">
                             <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
                             </a>
@@ -792,11 +817,11 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6">Serviços</h4>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Locação M4020</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Locação M4070</a></li>
+                        <li><span class="text-gray-400 transition">Locação M4020</span></li>
+                        <li><span class="text-gray-400 transition">Locação M4070</span></li>
                         <!-- plano de manutenção removido para foco em locação -->
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Venda de Toners</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Suporte e Cobertura</a></li>
+                        <li><span class="text-gray-400 transition">Venda de Toners</span></li>
+                        <li><span class="text-gray-400 transition">Suporte e Cobertura</span></li>
                     </ul>
                 </div>
                 
@@ -949,6 +974,46 @@
     (function(){ const y = new Date().getFullYear(); const el = document.getElementById('year'); if(el) el.textContent = y; })();
     </script>
     <script>
+    // Prevent selecting/copying the hero title (additional defensive layer)
+    (function(){
+        const title = document.querySelector('.hero-title');
+        if(!title) return;
+        function prevent(e){ e.preventDefault(); e.stopPropagation(); return false; }
+        title.addEventListener('copy', prevent);
+        title.addEventListener('cut', prevent);
+        title.addEventListener('selectstart', prevent);
+        title.addEventListener('contextmenu', prevent);
+        // also intercept key-based copy shortcuts when the title is focused
+        document.addEventListener('keydown', function(e){
+            if(!document.activeElement) return;
+            if(document.activeElement !== title) return;
+            // ctrl/cmd + c
+            if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') prevent(e);
+        });
+    })();
+    </script>
+    <script>
+    // Block copy/selection for everything inside #home
+    (function(){
+        const home = document.getElementById('home');
+        if(!home) return;
+        function prevent(e){ e.preventDefault(); e.stopPropagation(); return false; }
+
+        ['copy','cut','selectstart','contextmenu'].forEach(evt => home.addEventListener(evt, prevent));
+
+        // Block keyboard shortcuts (Ctrl/Cmd+A, Ctrl/Cmd+C) while focus is inside #home
+        document.addEventListener('keydown', function(e){
+            const active = document.activeElement;
+            if(!active) return;
+            if(!home.contains(active) && active !== document.body) return;
+            // Ctrl/Cmd + A or C
+            if((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'a' || e.key.toLowerCase() === 'c')){
+                prevent(e);
+            }
+        }, true);
+    })();
+    </script>
+    <script>
     // Mobile fixes: robust --vh using VisualViewport and touch-friendly overlays
     (function(){
         // 1) Use VisualViewport when available to set --vh and respond to keyboard/address-bar changes
@@ -984,26 +1049,28 @@
             cards.forEach(card => {
                 // pointerdown lets us detect touch vs mouse
                 card.addEventListener('pointerdown', function(ev){
-                    // only apply this special behavior for touch pointers
-                    if(ev.pointerType !== 'touch') return;
+                    // only handle primary touch pointers (avoid mouse/right-click interference)
+                    if(ev.pointerType !== 'touch' || (ev.isPrimary === false) || ev.button !== 0) return;
 
                     // if card already has overlay visible, allow normal interaction
                     if(card.classList.contains('touch-active')) return;
 
-                    // if we tapped a real actionable element (link/button) inside the card,
-                    // prevent it on first tap and open the overlay instead
+                    // if user explicitly tapped an actionable element (link/button) allow native behavior
                     const actionable = ev.target.closest('a, button');
-                    if(actionable){
-                        ev.preventDefault();
-                        ev.stopPropagation();
-                    }
+                    if(actionable) return; // do not block links/buttons
 
-                    // add class to show overlay and make inner button clickable
+                    // show overlay and set ARIA state for assistive tech
                     card.classList.add('touch-active');
+                    const ov = card.querySelector('.overlay');
+                    if(ov) ov.setAttribute('aria-hidden','false');
 
                     // ensure overlay will be removed if user scrolls or after timeout
                     clearTimeout(card._touchOverlayTimer);
-                    card._touchOverlayTimer = setTimeout(() => { card.classList.remove('touch-active'); }, 4200);
+                    card._touchOverlayTimer = setTimeout(() => { card.classList.remove('touch-active'); if(ov) ov.setAttribute('aria-hidden','true'); }, 3200);
+
+                    // prevent default only when we're intentionally intercepting the tap
+                    ev.preventDefault();
+                    ev.stopPropagation();
                 }, {passive:false});
 
                 // If the user taps outside (anywhere on document) remove the touch-active state
@@ -1029,6 +1096,37 @@
         });
         observer.observe(document.body, {attributes:true, childList:true, subtree:true});
     })();
+    // Defensive: ensure overlay anchor clicks always navigate reliably on mobile
+    (function(){
+        const overlays = Array.from(document.querySelectorAll('.service-card .overlay a'));
+        overlays.forEach(a => {
+            a.addEventListener('click', function(ev){
+                try{
+                    const href = a.href;
+                    if(!href) return; // nothing to do
+
+                    const target = (a.getAttribute('target') || '_self');
+
+                    // Stop other handlers from interfering and perform a robust navigation.
+                    // Prefer same-tab assignment for non-_blank targets (most reliable on mobile).
+                    ev.stopPropagation();
+                    ev.preventDefault();
+
+                    if(target === '_blank'){
+                        // Try opening a new tab; if blocked by a popup blocker, fall back to same-tab navigation.
+                        const newWin = window.open(href, '_blank');
+                        if(!newWin) try { window.location.href = href; } catch(e) { /* noop */ }
+                    } else {
+                        // Same-tab navigation is the most consistent fallback across browsers.
+                        window.location.href = href;
+                    }
+                }catch(e){
+                    // If anything goes wrong, let the browser handle the click as a last resort.
+                }
+            }, {passive:false});
+        });
+    })();
+    // ...existing code...
     </script>
     <script>
     // Hero down-arrow explicit smooth-scroll handler (useful if default anchor behavior is prevented)
