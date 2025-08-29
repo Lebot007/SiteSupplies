@@ -41,11 +41,16 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
+            /* when hidden the overlay must not intercept touch/scroll events on mobile */
+            pointer-events: none;
             transition: opacity 0.3s;
         }
         
-        .service-card:hover .overlay {
+        /* show overlay on hover (desktop) or when touch toggled (.touch-active) */
+        .service-card:hover .overlay,
+        .service-card.touch-active .overlay {
             opacity: 1;
+            pointer-events: auto; /* allow clicks when visible */
         }
         
         .floating {
@@ -942,6 +947,88 @@
         });
     // Set footer year dynamically
     (function(){ const y = new Date().getFullYear(); const el = document.getElementById('year'); if(el) el.textContent = y; })();
+    </script>
+    <script>
+    // Mobile fixes: robust --vh using VisualViewport and touch-friendly overlays
+    (function(){
+        // 1) Use VisualViewport when available to set --vh and respond to keyboard/address-bar changes
+        function setViewportVh(){
+            try{
+                const vv = window.visualViewport;
+                const vh = (vv ? vv.height : window.innerHeight) * 0.01;
+                document.documentElement.style.setProperty('--vh', vh + 'px');
+            }catch(e){
+                document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+            }
+        }
+
+        setViewportVh();
+        if(window.visualViewport){
+            // update on resize/scroll from the visual viewport (handles address bar appearing)
+            window.visualViewport.addEventListener('resize', setViewportVh, {passive:true});
+            window.visualViewport.addEventListener('scroll', setViewportVh, {passive:true});
+        }
+        window.addEventListener('resize', setViewportVh, {passive:true});
+
+        // 2) Close any touch-opened overlays when the user scrolls, wheels or moves their finger
+        const closeOverlaySignal = function(){
+            document.querySelectorAll('.service-card.touch-active').forEach(el => el.classList.remove('touch-active'));
+        };
+        window.addEventListener('scroll', closeOverlaySignal, {passive:true});
+        window.addEventListener('wheel', closeOverlaySignal, {passive:true});
+        window.addEventListener('touchmove', closeOverlaySignal, {passive:true});
+
+        // 3) Make service-card touch-friendly: first tap opens overlay (adds .touch-active), second tap activates inner link
+        const cards = Array.from(document.querySelectorAll('.service-card'));
+        if(cards.length){
+            cards.forEach(card => {
+                // pointerdown lets us detect touch vs mouse
+                card.addEventListener('pointerdown', function(ev){
+                    // only apply this special behavior for touch pointers
+                    if(ev.pointerType !== 'touch') return;
+
+                    // if card already has overlay visible, allow normal interaction
+                    if(card.classList.contains('touch-active')) return;
+
+                    // if we tapped a real actionable element (link/button) inside the card,
+                    // prevent it on first tap and open the overlay instead
+                    const actionable = ev.target.closest('a, button');
+                    if(actionable){
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                    }
+
+                    // add class to show overlay and make inner button clickable
+                    card.classList.add('touch-active');
+
+                    // ensure overlay will be removed if user scrolls or after timeout
+                    clearTimeout(card._touchOverlayTimer);
+                    card._touchOverlayTimer = setTimeout(() => { card.classList.remove('touch-active'); }, 4200);
+                }, {passive:false});
+
+                // If the user taps outside (anywhere on document) remove the touch-active state
+                document.addEventListener('pointerdown', function(ev){
+                    if(ev.pointerType !== 'touch') return;
+                    if(card.classList.contains('touch-active')){
+                        if(!ev.target.closest('.service-card')){
+                            card.classList.remove('touch-active');
+                        }
+                    }
+                }, {passive:true});
+            });
+        }
+
+        // 4) Defensive: ensure overlays don't capture pointer events when hidden (CSS already sets pointer-events:none)
+        // but if any scripts add inline styles, force pointer-events none when opacity is 0
+        const observer = new MutationObserver(() => {
+            document.querySelectorAll('.service-card .overlay').forEach(ov => {
+                const style = window.getComputedStyle(ov);
+                if(style.opacity === '0') ov.style.pointerEvents = 'none';
+                else ov.style.pointerEvents = '';
+            });
+        });
+        observer.observe(document.body, {attributes:true, childList:true, subtree:true});
+    })();
     </script>
     <script>
     // Hero down-arrow explicit smooth-scroll handler (useful if default anchor behavior is prevented)
