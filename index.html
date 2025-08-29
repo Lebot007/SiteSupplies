@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Supplies - Locação e suporte de impressoras Samsung (M4020, M4070). Vendas de toners originais e compatíveis. Atendimento via WhatsApp +55 31 99645-6583.">
-    <meta name="theme-color" content="#0b63c6">
+    <meta name="theme-color" content="#000000">
     <!-- Open Graph -->
     <meta property="og:title" content="Supplies - Locação de Impressoras Samsung">
     <meta property="og:description" content="Locação e suporte para impressoras Samsung (M4020, M4070). Toners originais e compatíveis.">
@@ -65,28 +65,28 @@
         }
         
         .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
+                position: fixed;
+                width: 60px;
+                height: 60px;
+                bottom: 40px;
+                right: 40px;
+                background-color: #111827; /* formal dark */
+                color: #FFF;
+                border-radius: 50px;
+                text-align: center;
+                font-size: 30px;
+                box-shadow: 2px 2px 6px rgba(0,0,0,0.45);
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.18s ease;
+            }
         
-        .whatsapp-float:hover {
-            background-color: #128C7E;
-            transform: scale(1.1);
-        }
+            .whatsapp-float:hover {
+                background-color: #000000;
+                transform: scale(1.06);
+            }
         
         .parallax {
             background-attachment: fixed;
@@ -129,9 +129,18 @@
     #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
     /* ensure hero content stays above canvas */
     #home .container { position: relative; z-index: 10; }
+    /* Neutralize blue utility classes to fit black & white theme */
+    .text-blue-400, .text-blue-600 { color: #4b5563 !important; }
+    .bg-blue-600, .bg-blue-50, .bg-blue-100, .bg-blue-400, .bg-blue-700 { background-color: #374151 !important; }
+    .hover\:bg-blue-700:hover { background-color: #111827 !important; }
+    .hover\:text-blue-300:hover { color: #9ca3af !important; }
+    /* Slightly darker grays for better contrast, keep them gray (titles mainly) */
+    .text-gray-400 { color: #6b7280 !important; } /* darker than tailwind gray-400 */
+    .text-gray-600 { color: #374151 !important; }
+    .text-gray-800 { color: #111827 !important; }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-white font-sans text-black">
     <a href="#home" class="skip-link sr-only focus:not-sr-only">Ir para o conteúdo</a>
 
     <noscript>
@@ -143,53 +152,53 @@
     </a>
 
     <!-- Navigation -->
-    <nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+    <nav class="bg-white text-black shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <i class="fas fa-print text-blue-900 text-2xl"></i>
+                    <div class="leading-tight">
+                        <div class="font-bold text-xl text-black">Supplies</div>
+                        <div class="text-sm text-gray-600">Soluções em Impressão</div>
                     </div>
-                    <span class="font-bold text-xl">Supplies</span>
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-white focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                    <button id="mobile-menu-button" class="text-black focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-blue-300 transition">Home</a>
-                    <a href="#services" class="hover:text-blue-300 transition">Serviços</a>
-                    <a href="#products" class="hover:text-blue-300 transition">Produtos</a>
-                    <a href="#about" class="hover:text-blue-300 transition">Sobre</a>
-                    <a href="#contact" class="hover:text-blue-300 transition">Contato</a>
+                    <a href="#home" class="hover:text-gray-600 transition">Home</a>
+                    <a href="#services" class="hover:text-gray-600 transition">Serviços</a>
+                    <a href="#products" class="hover:text-gray-600 transition">Produtos</a>
+                    <a href="#about" class="hover:text-gray-600 transition">Sobre</a>
+                    <a href="#contact" class="hover:text-gray-600 transition">Contato</a>
                 </div>
             </div>
             
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="#home" class="block py-2 hover:bg-blue-800 px-4 rounded">Home</a>
-                <a href="#services" class="block py-2 hover:bg-blue-800 px-4 rounded">Serviços</a>
-                <a href="#products" class="block py-2 hover:bg-blue-800 px-4 rounded">Produtos</a>
-                <a href="#about" class="block py-2 hover:bg-blue-800 px-4 rounded">Sobre</a>
-                <a href="#contact" class="block py-2 hover:bg-blue-800 px-4 rounded">Contato</a>
+                <a href="#home" class="block py-2 hover:bg-gray-200 px-4 rounded">Home</a>
+                <a href="#services" class="block py-2 hover:bg-gray-200 px-4 rounded">Serviços</a>
+                <a href="#products" class="block py-2 hover:bg-gray-200 px-4 rounded">Produtos</a>
+                <a href="#about" class="block py-2 hover:bg-gray-200 px-4 rounded">Sobre</a>
+                <a href="#contact" class="block py-2 hover:bg-gray-200 px-4 rounded">Contato</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+    <section id="home" class="relative h-screen flex items-center justify-center bg-black overflow-hidden">
         <canvas id="hero-canvas" aria-hidden="true"></canvas>
         <div class="container mx-auto px-4 z-10 relative">
                 <div class="max-w-3xl mx-auto text-center bg-black bg-opacity-70 p-8 rounded-xl">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Especialistas em Impressoras <span class="text-blue-400">Samsung</span></h1>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Especialistas em Impressoras <span class="text-gray-300">Samsung</span></h1>
                 <p class="text-xl text-gray-300 mb-8">Locação e suporte para os modelos M4020 e M4070. Venda de toners originais e compatíveis.</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o%20de%20impressoras." target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition transform hover:scale-105" aria-label="Abrir WhatsApp">
+                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o%20de%20impressoras." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-full transition transform hover:scale-105" aria-label="Abrir WhatsApp">
                         <i class="fab fa-whatsapp mr-2"></i> WhatsApp: +55 31 99645-6583
                     </a>
                 </div>
@@ -206,10 +215,10 @@
     <!-- Services Section -->
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos <span class="text-blue-600">Serviços</span></h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto">Especializados em locação e manutenção de impressoras Samsung, oferecemos serviços de qualidade com garantia.</p>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos <span class="text-gray-400">Serviços</span></h2>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Especializados em locação de impressoras Samsung, oferecemos planos flexíveis e garantia de qualidade.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -219,14 +228,14 @@
                     <img src="m4020.jpg" loading="lazy"
                         alt="Impressora Samsung M4020" class="w-full h-full object-cover">
                         <div class="overlay">
-                                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4020." target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4020." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
                             </a>
                         </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Locação Samsung M4020</h3>
-                        <p class="text-gray-600 mb-4">Planos de locação flexíveis para a impressora Samsung M4020, com suporte técnico e manutenção inclusa.</p>
+                        <p class="text-gray-600 mb-4">Planos de locação flexíveis para a impressora Samsung M4020, com suporte técnico incluso.</p>
                         <div class="flex items-center text-yellow-500 mb-2">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -244,7 +253,7 @@
                     <img src="m4070.jpg" loading="lazy"
                         alt="Impressora Samsung M4070" class="w-full h-full object-cover">
                         <div class="overlay">
-                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4070." target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4070." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
                             </a>
                         </div>
@@ -267,16 +276,16 @@
                 <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
                     <div class="relative h-48 overflow-hidden">
                         <img src="manutencao.jpg" loading="lazy"
-                             alt="Manutenção Preventiva" class="w-full h-full object-cover">
+                             alt="Locação com Suporte Técnico" class="w-full h-full object-cover">
                         <div class="overlay">
-                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20sobre%20planos%20de%20loca%C3%A7%C3%A3o%20com%20manuten%C3%A7%C3%A3o%20preventiva." target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
                             </a>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">Locação com Manutenção Preventiva</h3>
-                        <p class="text-gray-600 mb-4">Planos de locação que incluem manutenções preventivas periódicas para manter sua operação sem interrupções.</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Locação com Suporte Técnico</h3>
+                        <p class="text-gray-600 mb-4">Planos de locação com suporte técnico periódico para manter sua operação sem interrupções.</p>
                         <div class="flex items-center text-yellow-500 mb-2">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -294,9 +303,9 @@
     <!-- Products Info Section -->
     <section id="products" class="py-20 bg-gray-100">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Toners para Impressoras <span class="text-blue-600">Samsung</span></h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Toners para Impressoras <span class="text-gray-400">Samsung</span></h2>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
                 <p class="text-gray-600 max-w-2xl mx-auto">Comercializamos toners originais e compatíveis para locação e venda, especialmente para os modelos M4020 e M4070.</p>
             </div>
             
@@ -309,15 +318,15 @@
                         </p>
                         <ul class="space-y-2">
                             <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <i class="fas fa-check text-black mr-2 mt-1"></i>
                                 <span>Alta qualidade de impressão</span>
                             </li>
                             <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <i class="fas fa-check text-black mr-2 mt-1"></i>
                                 <span>Maior rendimento</span>
                             </li>
                             <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <i class="fas fa-check text-black mr-2 mt-1"></i>
                                 <span>Garantia Samsung</span>
                             </li>
                         </ul>
@@ -330,15 +339,15 @@
                         </p>
                         <ul class="space-y-2">
                             <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <i class="fas fa-check text-black mr-2 mt-1"></i>
                                 <span>Preço mais acessível</span>
                             </li>
                             <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <i class="fas fa-check text-black mr-2 mt-1"></i>
                                 <span>Testados e aprovados</span>
                             </li>
                             <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <i class="fas fa-check text-black mr-2 mt-1"></i>
                                 <span>Garantia Supplies</span>
                             </li>
                         </ul>
@@ -346,7 +355,7 @@
                 </div>
                 
                 <div class="text-center mt-8">
-                    <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                    <a href="#contact" class="inline-block bg-black hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
                         Entre em contato para mais informações
                     </a>
                 </div>
@@ -359,10 +368,10 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Sobre a <span class="text-blue-600">Supplies</span></h2>
-                    <div class="w-20 h-1 bg-blue-600 mb-6"></div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Sobre a <span class="text-gray-400">Supplies</span></h2>
+                    <div class="w-20 h-1 bg-gray-400 mb-6"></div>
                     <p class="text-gray-600 mb-6">
-                        A Supplies é especializada em locação e manutenção de impressoras Samsung, com foco nos modelos M4020 e M4070. 
+                        A Supplies é especializada em locação de impressoras Samsung, com foco nos modelos M4020 e M4070. 
                         Nossa equipe técnica possui mais de 10 anos de experiência no mercado, garantindo serviços de qualidade e peças originais.
                     </p>
                     <p class="text-gray-600 mb-8">
@@ -370,15 +379,15 @@
                         sempre priorizando a satisfação dos nossos clientes.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center bg-blue-50 px-4 py-3 rounded-lg">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-check-circle text-blue-600"></i>
+                        <div class="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
+                            <div class="bg-gray-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-check-circle text-black"></i>
                             </div>
                             <span class="font-semibold">Garantia em todos os serviços</span>
                         </div>
-                        <div class="flex items-center bg-blue-50 px-4 py-3 rounded-lg">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-truck text-blue-600"></i>
+                        <div class="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
+                            <div class="bg-gray-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-truck text-black"></i>
                             </div>
                             <span class="font-semibold">Entrega rápida</span>
                         </div>
@@ -386,15 +395,15 @@
                 </div>
                 
                     <div class="lg:w-1/2 relative">
-                    <div class="bg-blue-600 rounded-xl overflow-hidden shadow-2xl floating">
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-2xl floating">
                     <img src="sobre.jpg" 
                         alt="Equipe Supplies" class="w-full h-auto object-cover">
                     </div>
                     
                     <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-lg hidden md:block">
                         <div class="flex items-center">
-                            <div class="bg-blue-100 p-4 rounded-full mr-4">
-                                <i class="fas fa-headset text-blue-600 text-2xl"></i>
+                            <div class="bg-gray-100 p-4 rounded-full mr-4">
+                                <i class="fas fa-headset text-black text-2xl"></i>
                             </div>
                             <div>
                                 <h4 class="font-bold text-gray-800">Suporte Especializado</h4>
@@ -408,17 +417,17 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="py-20 bg-gray-900 text-white parallax" style="background-image: url('final.jpg');">
+    <section class="py-12 bg-gray-900 text-white parallax" style="background-image: url('final.jpg');">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">O que dizem <span class="text-blue-400">nossos clientes</span></h2>
-                <div class="w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
+                <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">O que dizem <span class="text-gray-400">nossos clientes</span></h2>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
                 <p class="text-gray-300 max-w-2xl mx-auto">Avaliações reais de clientes que utilizaram nossos serviços e produtos.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Testimonial 1 -->
-                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8">
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="flex items-center text-yellow-400 mr-4">
                             <i class="fas fa-star"></i>
@@ -428,7 +437,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                     </div>
-                    <p class="text-gray-300 mb-6 italic">"Contratamos a locação de uma Samsung M4020 com manutenção incluída e o atendimento da Supplies foi excelente. A solução manteve nossa operação sem interrupções."</p>
+                    <p class="text-gray-300 mb-6 italic">"Contratamos a locação de uma Samsung M4020 com suporte incluso e o atendimento da Supplies foi excelente. A solução manteve nossa operação sem interrupções."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
                             <img src="m4020.jpg" alt="Cliente" class="w-full h-full object-cover">
@@ -441,7 +450,7 @@
                 </div>
                 
                 <!-- Testimonial 2 -->
-                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8">
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="flex items-center text-yellow-400 mr-4">
                             <i class="fas fa-star"></i>
@@ -464,7 +473,7 @@
                 </div>
                 
                 <!-- Testimonial 3 -->
-                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8">
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="flex items-center text-yellow-400 mr-4">
                             <i class="fas fa-star"></i>
@@ -474,7 +483,7 @@
                             <i class="fas fa-star-half-alt"></i>
                         </div>
                     </div>
-                    <p class="text-gray-300 mb-6 italic">"Contratei o serviço de manutenção preventiva para nossas 5 impressoras M4020 e foi a melhor decisão. Reduzimos em 80% os problemas que tínhamos antes. Equipe muito profissional e atenciosa."</p>
+                    <p class="text-gray-300 mb-6 italic">"Contratamos a locação e o suporte técnico para nossas 5 impressoras M4020 e foi a melhor decisão. Reduzimos em 80% os problemas que tínhamos antes. Equipe muito profissional e atenciosa."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
                             <img src="manutencao.jpg" alt="Cliente" class="w-full h-full object-cover">
@@ -490,11 +499,11 @@
     </section>
 
     <!-- Contact Section (Informational only) -->
-    <section id="contact" class="py-20 bg-white">
+    <section id="contact" class="py-12 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
+                <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contato</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
                 <p class="text-gray-600 max-w-2xl mx-auto">Somente informações de contato. Para falar conosco, utilize o WhatsApp ou ligue para o número abaixo.</p>
             </div>
 
@@ -502,7 +511,7 @@
                 <div class="bg-gray-50 rounded-xl p-8 shadow-lg">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Telefone</h3>
                     <p class="text-gray-700 text-lg mb-6"><a href="tel:+5531996456583" class="text-gray-800 font-semibold">+55 31 99645-6583</a></p>
-                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20planos%20de%20loca%C3%A7%C3%A3o%20e%20venda%20de%20toners." target="_blank" class="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition" aria-label="Abrir WhatsApp">
+                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20planos%20de%20loca%C3%A7%C3%A3o%20e%20venda%20de%20toners." target="_blank" class="inline-flex items-center justify-center bg-black hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-full transition" aria-label="Abrir WhatsApp">
                         <i class="fab fa-whatsapp mr-2"></i> Abrir WhatsApp
                     </a>
                 </div>
@@ -511,17 +520,17 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-black text-white py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                            <i class="fas fa-print text-blue-900 text-2xl"></i>
+                            <i class="fas fa-print text-black text-2xl"></i>
                         </div>
-                        <span class="font-bold text-xl">Supplies</span>
+                        <span class="font-bold text-xl text-white">Supplies</span>
                     </div>
-                    <p class="text-gray-400 mb-4">Especialistas em locação e manutenção de impressoras Samsung, com foco nos modelos M4020 e M4070.</p>
+                    <p class="text-gray-400 mb-4">Especialistas em locação de impressoras Samsung, com foco nos modelos M4020 e M4070.</p>
                     <!-- social links removed as requested -->
                 </div>
                 
@@ -541,7 +550,7 @@
                     <ul class="space-y-3">
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Locação M4020</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Locação M4070</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Planos com Manutenção</a></li>
+                        <!-- plano de manutenção removido para foco em locação -->
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Venda de Toners</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Suporte e Cobertura</a></li>
                     </ul>
@@ -597,7 +606,7 @@
 
         // Lightweight reveal on scroll using IntersectionObserver
         document.addEventListener('DOMContentLoaded', function() {
-            const revealElements = document.querySelectorAll('.service-card, .service-card img, .bg-blue-600 img, .bg-gray-800 img');
+            const revealElements = document.querySelectorAll('.service-card, .service-card img, .bg-gray-800 img, .bg-gray-50 img');
 
             const io = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -634,19 +643,17 @@
     })();
     </script>
     <script>
-    // Enhanced particles for hero background (more visible, themed color)
+    // Enhanced particles for hero background (white particles on black)
     (function(){
         const canvas = document.getElementById('hero-canvas');
         if(!canvas) return;
 
-        // Respect reduced motion
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if(prefersReduced) { canvas.style.display = 'none'; return; }
 
         const ctx = canvas.getContext('2d');
         const deviceRatio = window.devicePixelRatio || 1;
 
-        // compute size using bounding rect to ensure full coverage, and use CSS var --vh for mobile 100vh issues
         function setSize(){
             const rect = canvas.getBoundingClientRect();
             const w = Math.max(1, Math.floor(rect.width));
@@ -659,41 +666,34 @@
             return {w,h};
         }
 
-        // particle system state
-        let state = { particles: [], w: 0, h: 0, isMobile: false };
-
-        function rand(min, max){ return Math.random()*(max-min)+min }
-        const color = { r: 157, g: 209, b: 255 };
+        let state = { particles: [], w:0, h:0, isMobile:false };
+        function rand(a,b){ return Math.random()*(b-a)+a }
 
         function initParticles(w,h){
             state.isMobile = window.innerWidth < 640;
-            // density based on area, with a min/max cap
             const area = w*h;
-            const base = Math.min(120, Math.max(36, Math.floor(area / 16000))); // tuned density
-            const count = state.isMobile ? Math.max(base, 48) : base;
+            const base = Math.min(110, Math.max(30, Math.floor(area / 18000)));
+            const count = state.isMobile ? Math.max(base, 36) : base;
             state.particles = [];
             for(let i=0;i<count;i++){
-                state.particles.push({ x: rand(0,w), y: rand(0,h), r: rand(0.9,2.6), vx: rand(-0.36,0.36), vy: rand(-0.12,0.12), alpha: rand(0.28,0.85) });
+                state.particles.push({ x: rand(0,w), y: rand(0,h), r: rand(0.8,2.8), vx: rand(-0.28,0.28), vy: rand(-0.12,0.12), alpha: rand(0.18,0.85) });
             }
         }
 
-        let rafId = null;
         function resizeAndReinit(){
             const size = setSize(); state.w = size.w; state.h = size.h; initParticles(state.w, state.h);
         }
 
-        // Observe size changes precisely
         const ro = new ResizeObserver(() => { clearTimeout(window._heroResize); window._heroResize = setTimeout(resizeAndReinit, 80); });
         ro.observe(canvas);
 
-        // Initialize
         resizeAndReinit();
 
         function draw(){
             const w = state.w, h = state.h;
             ctx.clearRect(0,0,w,h);
 
-            // move & draw particles
+            // draw particles (white)
             for(let i=0;i<state.particles.length;i++){
                 const p = state.particles[i];
                 p.x += p.vx; p.y += p.vy;
@@ -703,28 +703,28 @@
                 if(p.y > h + 10) p.y = -10;
 
                 ctx.beginPath();
-                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},${p.alpha})`;
+                ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
                 ctx.fill();
             }
 
-            // connecting lines
-            const maxDist = state.isMobile ? 120 : 180;
+            // connecting subtle lines (very light)
+            const maxDist = state.isMobile ? 100 : 160;
             for(let i=0;i<state.particles.length;i++){
                 for(let j=i+1;j<state.particles.length;j++){
                     const a = state.particles[i]; const b = state.particles[j];
                     const dx = a.x-b.x, dy = a.y-b.y;
                     const dist = Math.sqrt(dx*dx+dy*dy);
                     if(dist < maxDist){
-                        const alpha = (1 - dist/maxDist) * 0.18;
-                        ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${alpha})`;
-                        ctx.lineWidth = 1;
+                        const alpha = (1 - dist/maxDist) * 0.14;
+                        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+                        ctx.lineWidth = 0.8;
                         ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
                     }
                 }
             }
 
-            rafId = requestAnimationFrame(draw);
+            requestAnimationFrame(draw);
         }
 
         draw();
