@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Supplies - Locação e suporte de impressoras Samsung (M4020, M4070). Vendas de toners originais e compatíveis. Atendimento via WhatsApp +55 31 99645-6583.">
+    <meta name="theme-color" content="#000000">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Supplies - Locação de Impressoras Samsung">
+    <meta property="og:description" content="Locação e suporte para impressoras Samsung (M4020, M4070). Toners originais e compatíveis.">
+    <meta property="og:image" content="favicon.svg">
+    <meta property="og:type" content="website">
+    <title>Supplies - Locação de Impressoras Samsung</title>
+    <!-- Tailwind compilado localmente -->
+    <link href="dist/styles.css" rel="stylesheet">
+    <!-- CDN backup (comentado): <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- favicon original mantido como backup: favicon.svg -->
+    <link rel="icon" href="favicon-s.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    :root { --vh: 1vh; }
+    /* Global fixes to avoid mobile overflow/white stripe */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+    img { max-width: 100%; height: auto; display: block; }
+    .printer-model {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .service-card:hover .overlay {
+            opacity: 1;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .rotate-3d {
+            animation: rotate3d 15s infinite linear;
+        }
+        
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .whatsapp-float {
+                position: fixed;
+                width: 60px;
+                height: 60px;
+                bottom: 40px;
+                right: 40px;
+                background-color: #111827; /* formal dark */
+                color: #FFF;
+                border-radius: 50px;
+                text-align: center;
+                font-size: 30px;
+                box-shadow: 2px 2px 6px rgba(0,0,0,0.45);
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.18s ease;
+            }
+        
+            .whatsapp-float:hover {
+                background-color: #000000;
+                transform: scale(1.06);
+            }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        /* Responsive tweaks */
+        @media (max-width: 1024px) {
+            .printer-model { height: 300px; }
+            .overlay { background: rgba(0,0,0,0.6); }
+            .text-4xl { font-size: 2rem; }
+        }
+
+        /* Tablet landscape tweaks (768-1024) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            section#home { height: 70vh; }
+            .service-card { min-height: 420px; }
+            .text-4xl { font-size: 2.25rem; }
+        }
+
+        @media (max-width: 640px) {
+            .printer-model { height: 220px; }
+            .whatsapp-float { width: 52px; height: 52px; bottom: 24px; right: 16px; font-size: 26px; }
+            .text-4xl { font-size: 1.5rem; }
+            .container { padding-left: 1rem; padding-right: 1rem; }
+        }
+        /* Parallax fallback: avoid fixed background on smaller screens (iOS/Android issues) */
+        @media (max-width: 1024px) {
+            .parallax { background-attachment: scroll; }
+        }
+            /* Hero title: force two-line layout (main line + brand line) and responsive sizes
+               Requirement: show 'Especialistas em Impressoras' and below it 'Samsung'.
+               Mobile and iPad should be very large; desktop slightly smaller for balance. */
+            /* Fluid, clamped hero title to avoid overflow on narrow landscape phones
+               Use clamp to keep sizes large on tablets but shrink on narrow/wide viewports */
+            section#home h1 {
+                font-size: clamp(1.8rem, 6.4vw, 6.0rem);
+                line-height: 1.02;
+                margin-bottom: 0.5rem;
+                font-weight: 700;
+                overflow-wrap: break-word;
+                word-break: break-word;
+            }
+            /* make the brand (Samsung) sit on its own line and slightly lighter */
+            section#home h1 span { display: block; color: #cbd5e1 !important; font-weight: 700; opacity: 0.95; font-size: 0.95em; }
+
+            /* keep a stricter cap on extremely narrow landscape viewports (phones) */
+            @media (orientation: landscape) and (max-width: 900px) {
+                section#home h1 { font-size: clamp(1.4rem, 7.6vw, 3.6rem); }
+            }
+            /* Ensure the hero title remains prominent on small portrait phones
+               while keeping the responsive wrapping behavior (clamp + break-word) */
+            @media (max-width: 640px) and (orientation: portrait) {
+                section#home h1 { font-size: clamp(2.4rem, 9.6vw, 5.2rem); }
+                section#home h1 span { font-size: 0.98em; }
+                /* tighten spacing slightly for large mobile text */
+                .hero-title { letter-spacing: -0.0125em; }
+            }
+    /* Use CSS variable --vh to set hero height precisely on mobile */
+    section#home { height: calc(var(--vh, 1vh) * 100); overflow: hidden; }
+    /* Reveal animation used by IntersectionObserver */
+    .reveal { opacity: 1 !important; transform: translateY(0) !important; transition: opacity 400ms ease-out, transform 400ms ease-out; }
+    .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip-link:focus { left: 0; top: 0; width: auto; height: auto; background: #fff; color: #000; padding: 8px 12px; z-index: 60; }
+    a:focus-visible { outline: 3px solid rgba(11,99,198,0.5); outline-offset: 2px; }
+    /* Hero background image and particles layering */
+    /* background image: sits at the very back of the hero */
+    .hero-bg-image {
+        position: absolute;
+        /* center the GIF in the hero so it stays aligned with the title
+           independent of device aspect ratio */
+          top: 50%;
+          left: 50%;
+          /* use 3D translate to avoid subpixel rounding issues on mobile Safari (iPhone 12 Pro)
+              and force GPU compositing for crisper centering */
+          transform: translate3d(-50%, -50%, 0);
+          -webkit-transform: translate3d(-50%, -50%, 0);
+          will-change: transform;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        /* keep natural aspect ratio but cap to hero area */
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        object-position: center center;
+        z-index: 0; /* behind particles and content */
+        pointer-events: none;
+        margin: 0;
+    }
+    /* mobile: ensure the gif scales down to fit without cropping */
+    @media (max-width: 640px) {
+        /* mobile: manter GIF centralizado, aumentar levemente para melhor presença e evitar corte */
+        .hero-bg-image {
+            width: auto;
+            height: auto;
+            max-height: 92vh; /* maior limite para o GIF ocupar mais espaço sem cortar */
+            max-width: 120%; /* permitir que a imagem seja um pouco mais larga visualmente */
+            object-fit: contain;
+            object-position: center center;
+            /* keep the GPU-accelerated transform on mobile as well */
+            transform: translate3d(-50%, -50%, 0) scale(1.08); /* aumenta levemente sem perder centralização */
+            -webkit-transform: translate3d(-50%, -50%, 0) scale(1.08);
+            transition: transform 220ms ease;
+            will-change: transform;
+        }
+    }
+
+    /* for very narrow landscape phones (like iPhone 12 Pro in landscape) reduce GIF width
+       so it doesn't overlap the hero text which can be large */
+    @media (orientation: landscape) and (max-width: 900px) {
+        .hero-bg-image { max-width: 86%; max-height: 88vh; }
+        #home .container { padding-left: 1rem; padding-right: 1rem; }
+        .max-w-3xl { max-width: 92% !important; }
+    }
+
+    /* defensive: ensure hero cannot create horizontal overflow */
+    #home, #home * { box-sizing: border-box; }
+
+    /* Hero particles canvas: above background image but behind text */
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
+    /* ensure hero content stays above canvas and is perfectly centered */
+    #home .container {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%; /* fill hero so centering is exact */
+        text-align: center;
+    }
+    /* Title and CTA adjustments for readability when black box removed */
+    .hero-title { text-shadow: 0 6px 18px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.6); }
+    .hero-sub { text-shadow: 0 4px 12px rgba(0,0,0,0.45); }
+    .hero-cta { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); }
+    .hero-cta:hover { background: rgba(255,255,255,0.12); }
+    /* ensure the hero down-arrow sits above the hero content and is clickable */
+    #hero-down { position: relative; z-index: 70; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto; }
+    #hero-down i { pointer-events: none; }
+    /* force section headings and key texts to remain white on dark bg */
+    section#home h1, section#home p, nav.transparent .brand-title, nav.transparent .brand-sub { color: #fff !important; }
+    nav.transparent .nav-button { background: #ffffff; }
+    /* Neutralize blue utility classes to fit black & white theme */
+    .text-blue-400, .text-blue-600 { color: #4b5563 !important; }
+    .bg-blue-600, .bg-blue-50, .bg-blue-100, .bg-blue-400, .bg-blue-700 { background-color: #374151 !important; }
+    .hover\:bg-blue-700:hover { background-color: #111827 !important; }
+    .hover\:text-blue-300:hover { color: #9ca3af !important; }
+    /* Adjusted grays: lighter tones for better readability on dark background */
+    .text-gray-300 { color: #cbd5e1 !important; } /* light, used for small supporting text */
+    .text-gray-400 { color: #9ca3af !important; } /* slightly lightened */
+    .text-gray-600 { color: #9ca3af !important; } /* keep mid text visible but lighter */
+    .text-gray-800 { color: #111827 !important; }
+    /* Navbar: transparent and integrated with hero */
+    nav.transparent { background: transparent; box-shadow: none; }
+    nav.transparent .brand-title { color: #ffffff; }
+    nav.transparent .brand-sub { color: rgba(255,255,255,0.78); }
+    /* nav buttons that look like floating white pills on black */
+    .nav-button { background: #ffffff; color: #000000; padding: 0.45rem 0.9rem; border-radius: 9999px; box-shadow: 0 6px 18px rgba(2,6,23,0.25); font-weight:600; transition: transform 140ms ease, opacity 140ms ease; }
+    .nav-button:hover { transform: translateY(-3px); opacity: 0.95; }
+    /* Soften white cards to be less visually strong on dark pages */
+    /* Agora com gradiente elegante e borda ligeiramente mais grossa (sutil) */
+    .soften-card {
+        /* gradiente contínuo sem faixas claras no topo; azul levemente mais claro no meio */
+        background: linear-gradient(180deg, #07101a 0%, #123244 45%, #03111a 100%) !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        border-radius: 14px;
+        border: 1.6px solid rgba(255,255,255,0.15) !important; /* ligeiramente mais visível */
+        box-shadow: 0 10px 26px rgba(0,0,0,0.62);
+        backdrop-filter: none;
+        overflow: hidden;
+    }
+
+    /* garantir que outros cards que não usam .soften-card também fiquem consistentes */
+    .service-card {
+        background: linear-gradient(180deg, #07101a 0%, #123244 45%, #03111a 100%) !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        border-radius: 14px;
+        border: 1.6px solid rgba(255,255,255,0.15) !important;
+        box-shadow: 0 10px 26px rgba(0,0,0,0.62);
+    }
+
+    /* overlay sutil sobre as imagens internas para unificar o visual e garantir legibilidade
+       - pseudo-element na div.relative (que já existe em cada card) permite aplicar sem mexer no HTML
+       - overlay de hover (.overlay) deve ficar acima dessa camada, por isso z-index separado */
+    .service-card .relative { position: relative; }
+    .service-card .relative::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(3,16,22,0.16) 0%, rgba(18,50,68,0.10) 55%, rgba(3,17,26,0.14) 100%);
+        pointer-events: none;
+        z-index: 1; /* acima da imagem (z-index 0) */
+    }
+    .service-card img { position: relative; z-index: 0; }
+    .service-card .overlay { z-index: 2; }
+    .service-card .p-6, .service-card .p-6 * { color: inherit; }
+    /* slightly deeper for true-white elements when needed */
+    .soften-card--light { background-color: rgba(255,255,255,0.98) !important; }
+    /* Ensure text inside white/soften cards is dark (near black) for readability */
+    /* texto principal nas boxes escuras: branco para contraste */
+    .soften-card, .soften-card p, .soften-card li, .soften-card span, .soften-card a, .soften-card h3, .soften-card h4 {
+        color: #ffffff !important;
+    }
+    /* pequenos textos/metas ficam em cinza claro para hierarquia */
+    .soften-card .text-gray-600, .soften-card .text-gray-400, .soften-card .text-gray-300 { color: #cbd5e1 !important; }
+    /* forçar textos que usam classes azuis para cinza leve sobre fundo preto */
+    .soften-card .text-blue-400, .soften-card .text-blue-600, .soften-card .text-blue-500 { color: #cbd5e1 !important; }
+    /* But if an element inside a softened card has a black background (button), keep its text white */
+    .soften-card .bg-black, .soften-card a.bg-black, .soften-card button.bg-black, .soften-card .inline-block.bg-black {
+        color: #ffffff !important;
+    }
+    /* mobile menu button contrast on dark background */
+    .mobile-contrast { color: #ffffff !important; }
+
+    /* Mobile menu staggered animation: items start hidden and slide/fade in */
+    /* Do not force display via ID selector — Tailwind's `hidden` utility controls visibility. */
+    /* container animation: invisible by default, will animate in when `.menu-visible` added */
+    #mobile-menu {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 420ms cubic-bezier(.2,.9,.2,1), transform 420ms cubic-bezier(.2,.9,.2,1), max-height 420ms cubic-bezier(.2,.9,.2,1);
+        will-change: opacity, transform, max-height;
+        display: none; /* keep Tailwind's hidden control as primary */
+        max-height: 0; /* collapsed by default */
+        overflow: hidden; /* prevent internal content showing before expansion */
+    }
+    /* when we want the container visible (synced with first item), use this class */
+    #mobile-menu.menu-visible {
+        display: block; /* ensure it's visible while animating */
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        max-height: 420px; /* allow expansion (tweak if your menu is taller) */
+    }
+
+    /* closing state: allow a smooth fade/slide up */
+    #mobile-menu.menu-closing {
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        max-height: 0;
+    }
+
+    /* items animation (staggered) */
+    #mobile-menu .menu-item { opacity: 0; transform: translateY(-12px); transition: opacity 420ms cubic-bezier(.2,.9,.2,1), transform 420ms cubic-bezier(.2,.9,.2,1); backface-visibility: hidden; -webkit-backface-visibility: hidden; will-change: opacity, transform; pointer-events: none; }
+    /* When item becomes visible, allow pointer events */
+    #mobile-menu .menu-item.menu-visible { pointer-events: auto; }
+    /* disable pointer events while closing to avoid accidental clicks during animation */
+    #mobile-menu.menu-closing { pointer-events: none; }
+    /* ensure hidden state does not allow interactions regardless of class toggles */
+    #mobile-menu.hidden { pointer-events: none; display: none; }
+    /* when the container is visible and an item has been marked visible, show it (matches JS) */
+    #mobile-menu.menu-visible .menu-item.menu-visible { opacity: 1; transform: translateY(0); }
+    /* closing uses slightly faster but smooth timing per item */
+    #mobile-menu.menu-closing .menu-item { transition: opacity 300ms ease, transform 300ms ease; }
+    /* Ensure product check icons remain green even inside .soften-card which forces white */
+    #products .fa-check, #products i.fas.fa-check { color: #10B981 !important; }
+    /* Force service stars to appear golden (dourado) inside services section */
+    #services .fa-star, #services i.fas.fa-star { color: #D4AF37 !important; }
+    /* include half stars used in some ratings */
+    #services .fa-star-half-alt, #services i.fas.fa-star-half-alt { color: #D4AF37 !important; }
+    /* Testimonials GIF background: keep native resolution, cover area and improve rendering */
+    .testimonial-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0.86;
+        filter: brightness(0.34) saturate(0.9);
+        image-rendering: auto; /* avoid pixelation */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+        z-index: 0;
+        pointer-events: none;
+    }
+    /* ensure the transparent nav content sits above hero canvas */
+    nav.transparent { position: sticky; top: 0; z-index: 60; }
+    </style>
+</head>
+<body class="bg-black font-sans text-white">
+    <a href="#home" class="skip-link sr-only focus:not-sr-only">Ir para o conteúdo</a>
+
+    <noscript>
+        <div class="bg-yellow-100 text-yellow-800 p-2 text-center">Algumas funcionalidades podem ficar limitadas sem JavaScript. Para melhor experiência, habilite JavaScript.</div>
+    </noscript>
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="transparent text-white sticky top-0">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="leading-tight">
+                        <div class="font-bold text-xl brand-title">Supplies</div>
+                        <div class="text-sm brand-sub">Soluções em Impressão</div>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="mobile-contrast focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-4 items-center">
+                    <a href="#home" class="nav-button">Home</a>
+                    <a href="#services" class="nav-button">Serviços</a>
+                    <a href="#products" class="nav-button">Produtos</a>
+                    <a href="#about" class="nav-button">Sobre</a>
+                    <a href="#contact" class="nav-button">Contato</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4" aria-hidden="true">
+                <a href="#home" class="block nav-button my-2 menu-item">Home</a>
+                <a href="#services" class="block nav-button my-2 menu-item">Serviços</a>
+                <a href="#products" class="block nav-button my-2 menu-item">Produtos</a>
+                <a href="#about" class="block nav-button my-2 menu-item">Sobre</a>
+                <a href="#contact" class="block nav-button my-2 menu-item">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Hero background image (behind particles and content) -->
+        <img src="boll.gif" alt="Background" aria-hidden="true" class="hero-bg-image" loading="lazy">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="container mx-auto px-4 z-10 relative">
+        <!-- caixa preta removida: manter padding e alinhamento, legibilidade via text-shadow -->
+                <div class="max-w-3xl mx-auto text-center p-8" style="box-sizing: border-box; width:100%;">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 hero-title">Especialistas em Impressoras <span class="text-gray-300">Samsung</span></h1>
+                <p class="text-xl text-gray-300 mb-8 hero-sub">Locação e suporte para os modelos M4020 e M4070. Venda de toners originais e compatíveis.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o%20de%20impressoras." target="_blank" rel="noopener noreferrer" class="hero-cta text-white font-bold py-3 px-6 rounded-full transition transform hover:scale-105" aria-label="Abrir WhatsApp">
+                        <i class="fab fa-whatsapp mr-2"></i> WhatsApp: +55 31 99645-6583
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#services" id="hero-down" class="text-white text-4xl" aria-label="Ir para Serviços">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nossos <span class="text-gray-300">Serviços</span></h2>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">Especializados em locação de impressoras Samsung, oferecemos planos flexíveis e garantia de qualidade.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="relative h-48 overflow-hidden">
+                    <img src="m4020.jpg" loading="lazy"
+                        alt="Impressora Samsung M4020" class="w-full h-full object-cover">
+                        <div class="overlay">
+                                    <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4020." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                                Saiba Mais
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Locação Samsung M4020</h3>
+                        <p class="text-gray-600 mb-4">Planos de locação flexíveis para a impressora Samsung M4020, com suporte técnico incluso.</p>
+                        <div class="flex items-center text-yellow-500 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 ml-2">(45 avaliações)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="relative h-48 overflow-hidden">
+                    <img src="m4070.jpg" loading="lazy"
+                        alt="Impressora Samsung M4070" class="w-full h-full object-cover">
+                        <div class="overlay">
+                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4070." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                                Saiba Mais
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Locação Samsung M4070</h3>
+                        <p class="text-gray-600 mb-4">Planos de locação e aluguel para a impressora Samsung M4070 com contrato mensal e suporte técnico.</p>
+                        <div class="flex items-center text-yellow-500 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-gray-600 ml-2">(32 avaliações)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="manutencao.jpg" loading="lazy"
+                             alt="Locação com Suporte Técnico" class="w-full h-full object-cover">
+                        <div class="overlay">
+                            <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
+                                Saiba Mais
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Locação com Suporte Técnico</h3>
+                        <p class="text-gray-600 mb-4">Planos de locação com suporte técnico periódico para manter sua operação sem interrupções.</p>
+                        <div class="flex items-center text-yellow-500 mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-gray-600 ml-2">(28 avaliações)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Info Section -->
+    <section id="products" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Toners para Impressoras <span class="text-gray-300">Samsung</span></h2>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">Comercializamos toners originais e compatíveis para locação e venda, especialmente para os modelos M4020 e M4070.</p>
+            </div>
+            
+            <div class="bg-white soften-card rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Toners Originais</h3>
+                        <p class="text-gray-600 mb-4">
+                            Garantia de qualidade e desempenho com produtos originais Samsung.
+                        </p>
+                        <ul class="space-y-2 text-gray-800">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Alta qualidade de impressão</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Maior rendimento</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Garantia Samsung</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Toners Compatíveis</h3>
+                        <p class="text-gray-600 mb-4">
+                            Excelente custo-benefício com qualidade comprovada.
+                        </p>
+                        <ul class="space-y-2 text-gray-800">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Preço mais acessível</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Testados e aprovados</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Garantia Supplies</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <a href="#contact" class="inline-block bg-black hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                        Entre em contato para mais informações
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Sobre a <span class="text-gray-300">Supplies</span></h2>
+                    <div class="w-20 h-1 bg-gray-400 mb-6"></div>
+                    <p class="text-gray-300 mb-6">
+                        A Supplies é especializada em locação de impressoras Samsung, com foco nos modelos M4020 e M4070. 
+                        Nossa equipe técnica possui mais de 10 anos de experiência no mercado, garantindo serviços de qualidade e peças originais.
+                    </p>
+                    <p class="text-gray-300 mb-8">
+                        Além dos serviços técnicos, comercializamos toners originais e compatíveis com a melhor relação custo-benefício do mercado, 
+                        sempre priorizando a satisfação dos nossos clientes.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center bg-gray-50 soften-card px-4 py-3 rounded-lg">
+                            <div class="bg-gray-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-check-circle text-black"></i>
+                            </div>
+                            <span class="font-semibold text-gray-800">Garantia em todos os serviços</span>
+                        </div>
+                        <div class="flex items-center bg-gray-50 soften-card px-4 py-3 rounded-lg">
+                            <div class="bg-gray-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-truck text-black"></i>
+                            </div>
+                            <span class="font-semibold text-gray-800">Entrega rápida</span>
+                        </div>
+                    </div>
+                </div>
+                
+                    <div class="lg:w-1/2 relative">
+                    <div class="bg-transparent overflow-visible">
+                    <img src="box.gif" 
+                        alt="Equipe Supplies" class="w-full h-auto object-cover" style="border:0;box-shadow:none;border-radius:0;">
+                    </div>
+                    
+                    <div class="absolute -bottom-8 -left-8 bg-white soften-card p-6 rounded-xl shadow-lg hidden md:block">
+                        <div class="flex items-center">
+                            <div class="bg-gray-100 p-4 rounded-full mr-4">
+                                <i class="fas fa-headset text-black text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Suporte Especializado</h4>
+                                <p class="text-gray-600 text-sm">Atendimento personalizado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-12 bg-gray-900 text-white relative overflow-hidden">
+        <img src="final.gif" alt="" aria-hidden="true" class="testimonial-bg">
+        <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">O que dizem <span class="text-gray-400">nossos clientes</span></h2>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">Avaliações reais de clientes que utilizaram nossos serviços e produtos.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Contratamos a locação de uma Samsung M4020 com suporte incluso e o atendimento da Supplies foi excelente. A solução manteve nossa operação sem interrupções."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+                            <img src="m4020.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Carlos Silva</h4>
+                            <p class="text-sm text-gray-400">Empresa ABC</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Comprei toner compatível para minha M4070 e estou muito satisfeita. A qualidade da impressão é ótima e o preço muito abaixo do mercado. Recomendo a Supplies para todos que precisam de produtos para impressora."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+                            <img src="m4070.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Ana Oliveira</h4>
+                            <p class="text-sm text-gray-400">Escritório Contábil</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Contratamos a locação e o suporte técnico para nossas 5 impressoras M4020 e foi a melhor decisão. Reduzimos em 80% os problemas que tínhamos antes. Equipe muito profissional e atenciosa."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+                            <img src="manutencao.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Roberto Santos</h4>
+                            <p class="text-sm text-gray-400">Escola Municipal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Informational only) -->
+    <section id="contact" class="py-12 bg-black text-white">
+        <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Contato</h2>
+                <div class="w-20 h-1 bg-gray-400 mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">Somente informações de contato. Para falar conosco, utilize o WhatsApp abaixo.</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="text-gray-300 mb-6">Clique no botão para iniciar uma conversa no WhatsApp:</p>
+                <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20planos%20de%20loca%C3%A7%C3%A3o%20e%20venda%20de%20toners." target="_blank" class="inline-flex items-center justify-center bg-white hover:bg-gray-200 text-black font-bold py-3 px-6 rounded-full transition" aria-label="Abrir WhatsApp">
+                    <i class="fab fa-whatsapp mr-2"></i> Abrir WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-print text-black text-2xl"></i>
+                        </div>
+                        <span class="font-bold text-xl text-white">Supplies</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Especialistas em locação de impressoras Samsung, com foco nos modelos M4020 e M4070.</p>
+                    <!-- social links removed as requested -->
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Serviços</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition">Produtos</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">Sobre</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Serviços</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Locação M4020</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Locação M4070</a></li>
+                        <!-- plano de manutenção removido para foco em locação -->
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Venda de Toners</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Suporte e Cobertura</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Contato</h4>
+                    <p class="text-gray-400 mb-4">Telefone: <strong><a href="tel:+5531996456583" class="text-gray-200 hover:underline">+55 31 99645-6583</a></strong></p>
+                    <p class="text-gray-400">WhatsApp: <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Supplies%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:underline">Abrir conversa</a></p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p id="footer-year" class="text-gray-400 mb-4 md:mb-0">© <span id="year">2023</span> Supplies. Todos os direitos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Termos de Serviço</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+        <script>
+        // Mobile menu toggle with staggered animation (open top->bottom, close bottom->top)
+        (function(){
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            const items = Array.from(menu.querySelectorAll('.menu-item'));
+            let animState = 'closed'; // 'closed' | 'opening' | 'open' | 'closing'
+
+            function setAria(open){
+                btn.setAttribute('aria-expanded', String(open));
+                menu.setAttribute('aria-hidden', String(!open));
+            }
+
+            const STAGGER = 140; // ms between items (slower, more pleasant)
+            const OPEN_DELAY = 120; // small initial delay before first item appears
+
+            // ensure items aren't focusable when menu is closed
+            items.forEach(it => it.setAttribute('tabindex', '-1'));
+
+            function openMenu(){
+                if(animState === 'open' || animState === 'opening') return;
+                animState = 'opening';
+                // show container and start its entrance animation
+                menu.classList.remove('hidden');
+                menu.classList.remove('menu-closing');
+                menu.classList.add('menu-visible');
+                // set aria after making visible
+                setTimeout(() => setAria(true), 20);
+
+                // staggered reveal top->bottom
+                // wait a short moment to let container animate open (matches CSS timing)
+                setTimeout(() => {
+                    items.forEach((it, i) => {
+                        it.classList.remove('menu-visible');
+                        setTimeout(() => {
+                            it.classList.add('menu-visible');
+                            // make focusable when visible
+                            it.setAttribute('tabindex', '0');
+                        }, (i * STAGGER));
+                    });
+                }, OPEN_DELAY);
+
+                // finalize after last item animation
+                setTimeout(() => { animState = 'open'; setAria(true); }, OPEN_DELAY + (items.length * STAGGER) + 80);
+            }
+
+            function closeMenu(){
+                if(animState === 'closed' || animState === 'closing') return;
+                animState = 'closing';
+                // set aria immediately on close intent
+                setAria(false);
+
+                // reverse stagger: hide bottom->top gradually
+                const reversed = items.slice().reverse();
+                reversed.forEach((it, idx) => {
+                    setTimeout(() => {
+                        it.classList.remove('menu-visible');
+                        // make unfocusable while hidden
+                        it.setAttribute('tabindex', '-1');
+                    }, 60 + (idx * (STAGGER * 0.9)));
+                });
+
+                // after items finish hiding, animate container out then fully hide
+                const hideAfter = 60 + (reversed.length * (STAGGER * 0.9)) + 80;
+                setTimeout(() => {
+                    menu.classList.remove('menu-visible');
+                    menu.classList.add('menu-closing');
+                    // wait for container animation to finish (match CSS 420ms)
+                    setTimeout(() => { menu.classList.add('hidden'); menu.classList.remove('menu-closing'); animState = 'closed'; }, 460);
+                }, hideAfter);
+            }
+
+            btn.addEventListener('click', function(){
+                if(animState === 'open' || animState === 'opening') closeMenu(); else openMenu();
+            });
+
+            // close menu if navigation item clicked (mobile)
+            items.forEach(it => it.addEventListener('click', () => { if(window.innerWidth < 768) closeMenu(); }));
+        })();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                // ignore empty hashes like "#" which are common placeholders
+                if (!targetId || targetId === '#') return;
+                e.preventDefault();
+
+                let targetElement = null;
+                try {
+                    targetElement = document.querySelector(targetId);
+                } catch (err) {
+                    // invalid selector (defensive), bail out
+                    return;
+                }
+
+                if (targetElement) {
+                    window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+
+                    // Close mobile menu if open and sync aria state
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    const mobileBtn = document.getElementById('mobile-menu-button');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        if(mobileBtn) mobileBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+
+        // Lightweight reveal on scroll using IntersectionObserver
+        document.addEventListener('DOMContentLoaded', function() {
+            const revealElements = document.querySelectorAll('.service-card, .service-card img, .bg-gray-800 img, .bg-gray-50 img');
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            revealElements.forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-6');
+                io.observe(el);
+            });
+        });
+    // Set footer year dynamically
+    (function(){ const y = new Date().getFullYear(); const el = document.getElementById('year'); if(el) el.textContent = y; })();
+    </script>
+    <script>
+    // Hero down-arrow explicit smooth-scroll handler (useful if default anchor behavior is prevented)
+    (function(){
+        const down = document.getElementById('hero-down');
+        if(!down) return;
+        down.addEventListener('click', function(e){
+            e.preventDefault();
+            const target = document.getElementById('services');
+            if(!target) return;
+            const offset = 80; // keep same header offset used elsewhere
+            const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        });
+    })();
+    </script>
+    <script>
+    // Fallback capture-phase listener + touch-area for hero-down to ensure click/touch works
+    (function(){
+        const down = document.getElementById('hero-down');
+        const target = document.getElementById('services');
+        if(!down || !target) return;
+
+        function scrollToServices(){
+            const offset = 80;
+            const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+
+        // Capture-phase listener: intercept events before overlays that may stopPropagation
+        document.addEventListener('click', function handler(e){
+            // If click is visually near the hero-down (within its bounding rect or within 44px touch area), trigger
+            const rect = down.getBoundingClientRect();
+            const x = e.clientX, y = e.clientY;
+            const padding = 18; // expand clickable area slightly
+            if(x >= rect.left - padding && x <= rect.right + padding && y >= rect.top - padding && y <= rect.bottom + padding){
+                e.preventDefault();
+                scrollToServices();
+            }
+        }, true); // useCapture = true
+
+        // touchend fallback for touch devices where click may be delayed or intercepted
+        document.addEventListener('touchend', function teHandler(e){
+            const touch = (e.changedTouches && e.changedTouches[0]);
+            if(!touch) return;
+            const rect = down.getBoundingClientRect();
+            const padding = 18;
+            const x = touch.clientX, y = touch.clientY;
+            if(x >= rect.left - padding && x <= rect.right + padding && y >= rect.top - padding && y <= rect.bottom + padding){
+                e.preventDefault();
+                scrollToServices();
+            }
+        }, { passive: false, capture: true });
+
+        // Also ensure the down element itself has a strong z-index and pointer-events
+        down.style.zIndex = '70';
+        down.style.pointerEvents = 'auto';
+    })();
+    </script>
+    <script>
+    // Fix mobile 100vh issue and avoid right-side white stripe
+    (function(){
+        function setVh(){
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', vh + 'px');
+        }
+        setVh();
+        window.addEventListener('resize', () => { clearTimeout(window._vhResize); window._vhResize = setTimeout(setVh, 120); });
+
+        // prevent subpixel rounding causing right-side white stripe
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
+        const hero = document.getElementById('home');
+        if(hero) hero.style.minWidth = '100%';
+    })();
+    </script>
+    <script>
+    // Enhanced particles for hero background (white particles on black)
+    (function(){
+        const canvas = document.getElementById('hero-canvas');
+        if(!canvas) return;
+
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(prefersReduced) { canvas.style.display = 'none'; return; }
+
+        const ctx = canvas.getContext('2d');
+        const deviceRatio = window.devicePixelRatio || 1;
+
+        function setSize(){
+            const rect = canvas.getBoundingClientRect();
+            const w = Math.max(1, Math.floor(rect.width));
+            const h = Math.max(1, Math.floor(rect.height));
+            canvas.width = Math.max(1, Math.floor(w * deviceRatio));
+            canvas.height = Math.max(1, Math.floor(h * deviceRatio));
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+            ctx.setTransform(deviceRatio,0,0,deviceRatio,0,0);
+            return {w,h};
+        }
+
+        let state = { particles: [], w:0, h:0, isMobile:false };
+        function rand(a,b){ return Math.random()*(b-a)+a }
+
+        function initParticles(w,h){
+            state.isMobile = window.innerWidth < 640;
+            const area = w*h;
+            /* aumentar levemente a densidade: usar divisor menor para mais partículas */
+            const densityDivisor = 15000; /* antes 18000 */
+            const calculated = Math.floor(area / densityDivisor);
+            const base = Math.min(140, Math.max(state.isMobile ? 28 : 40, calculated));
+            const count = state.isMobile ? Math.max(base, 44) : base; /* aumentar mínimo mobile para 44 */
+            state.particles = [];
+            for(let i=0;i<count;i++){
+                /* manter variação de tamanho/velocidade, mas permitir um pouco mais de r */
+                state.particles.push({ x: rand(0,w), y: rand(0,h), r: rand(0.9,3.2), vx: rand(-0.36,0.36), vy: rand(-0.14,0.14), alpha: rand(0.2,0.92) });
+            }
+        }
+
+        function resizeAndReinit(){
+            const size = setSize(); state.w = size.w; state.h = size.h; initParticles(state.w, state.h);
+        }
+
+        const ro = new ResizeObserver(() => { clearTimeout(window._heroResize); window._heroResize = setTimeout(resizeAndReinit, 80); });
+        ro.observe(canvas);
+
+        resizeAndReinit();
+
+        function draw(){
+            const w = state.w, h = state.h;
+            ctx.clearRect(0,0,w,h);
+
+            // draw particles (white)
+            for(let i=0;i<state.particles.length;i++){
+                const p = state.particles[i];
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < -10) p.x = w + 10;
+                if(p.x > w + 10) p.x = -10;
+                if(p.y < -10) p.y = h + 10;
+                if(p.y > h + 10) p.y = -10;
+
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+                ctx.fill();
+            }
+
+            // connecting subtle lines (very light)
+            const maxDist = state.isMobile ? 100 : 160;
+            for(let i=0;i<state.particles.length;i++){
+                for(let j=i+1;j<state.particles.length;j++){
+                    const a = state.particles[i]; const b = state.particles[j];
+                    const dx = a.x-b.x, dy = a.y-b.y;
+                    const dist = Math.sqrt(dx*dx+dy*dy);
+                    if(dist < maxDist){
+                        const alpha = (1 - dist/maxDist) * 0.14;
+                        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    })();
+    </script>
+</body>
+</html>
