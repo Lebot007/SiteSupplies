@@ -10,6 +10,9 @@ const ASSETS_TO_PRECACHE = [
   '/dist/styles.css',
   '/favicon-s.svg',
   '/favicon.svg'
+  // Observação: não pré-cacheamos .webp aqui para evitar falha de instalação caso os arquivos .webp
+  // ainda não existam no servidor. Quando os .webp forem gerados e subidos ao servidor, você pode
+  // adicionar os caminhos correspondentes a ASSETS_TO_PRECACHE para precaching.
 ];
 
 self.addEventListener('install', (event) => {
@@ -30,7 +33,12 @@ self.addEventListener('activate', (event) => {
 });
 
 function isImageRequest(request) {
-  return request.destination === 'image' || /\.(?:png|jpg|jpeg|gif|webp|svg)$/.test(request.url);
+  // Considera solicitações que o browser marca como image, ou urls com extensões comuns.
+  try{
+    return request.destination === 'image' || /\.(?:png|jpg|jpeg|gif|webp|svg)(?:\?|$)/i.test(request.url);
+  }catch(e){
+    return false;
+  }
 }
 
 self.addEventListener('fetch', (event) => {
