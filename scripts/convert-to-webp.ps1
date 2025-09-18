@@ -39,19 +39,19 @@ foreach($f in $files){
     if(Test-Path $f){
         $out = [System.IO.Path]::ChangeExtension($f, '.webp')
         if(Test-Path $out){
-            Write-Host "$out já existe — pulando" -ForegroundColor Gray
+            Write-Host ("{0} já existe — pulando" -f $out) -ForegroundColor Gray
             continue
         }
-        Write-Host "Convertendo $f -> $out"
+        Write-Host ("Convertendo {0} -> {1}" -f $f, $out)
         try{
             if($cwebp){ Convert-With-Cwebp $f $out }
             elseif($magick){ Convert-With-ImageMagick $f $out }
-            Write-Host "Criado: $out" -ForegroundColor Green
+            Write-Host ("Criado: {0}" -f $out) -ForegroundColor Green
         }catch{
-            Write-Host "Falha ao converter $f: $_" -ForegroundColor Red
+            Write-Host ("Falha ao converter {0}: {1}" -f $f, $_) -ForegroundColor Red
         }
     }else{
-        Write-Host "Arquivo não encontrado: $f" -ForegroundColor DarkYellow
+        Write-Host ("Arquivo não encontrado: {0}" -f $f) -ForegroundColor DarkYellow
     }
 }
 
