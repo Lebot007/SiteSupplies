@@ -467,10 +467,10 @@
     <!-- Hero Section -->
     <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
         <!-- Hero background image (behind particles and content) -->
-        <!-- Hero background: use the existing GIF directly so it always appears; keep decoding/loading attributes -->
-    <img src="boll.gif" alt="Background" aria-hidden="true" class="hero-bg-image" loading="eager" decoding="async" width="1600" height="900" fetchpriority="high">
-    <!-- Preload hero image to prioritize LCP candidate (safe because hero is visible immediately) -->
-    <link rel="preload" as="image" href="boll.gif">
+            <!-- Hero background: usar GIF original por segurança; script opcional converte para WebP quando disponível -->
+        <img src="boll.gif" alt="Background" aria-hidden="true" class="hero-bg-image" loading="eager" decoding="async" width="1600" height="900" fetchpriority="high">
+        <!-- Preload hero image (original) to prioritize LCP candidate -->
+        <link rel="preload" as="image" href="boll.gif">
         <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="container mx-auto px-4 z-10 relative">
         <!-- caixa preta removida: manter padding e alinhamento, legibilidade via text-shadow -->
@@ -505,7 +505,7 @@
                 <!-- Service 1 -->
                 <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
                     <div class="relative h-48 overflow-hidden">
-                    <img src="m4020.jpg" loading="lazy" decoding="async" alt="Impressora Samsung M4020" class="w-full h-full object-cover" width="800" height="480">
+                    <img src="m4020.jpg" loading="lazy" decoding="async" alt="Impressora Samsung M4020" class="w-full h-full object-cover" width="800" height="480" data-webp="m4020.webp">
                         <div class="overlay" role="dialog" aria-hidden="true">
                                     <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4020." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
@@ -529,7 +529,7 @@
                 <!-- Service 2 -->
                 <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
                     <div class="relative h-48 overflow-hidden">
-                    <img src="m4070.jpg" loading="lazy" decoding="async" alt="Impressora Samsung M4070" class="w-full h-full object-cover" width="800" height="480">
+                    <img src="m4070.jpg" loading="lazy" decoding="async" alt="Impressora Samsung M4070" class="w-full h-full object-cover" width="800" height="480" data-webp="m4070.webp">
                         <div class="overlay" role="dialog" aria-hidden="true">
                             <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4070." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
@@ -553,7 +553,7 @@
                 <!-- Service 3 -->
                 <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="manutencao.jpg" loading="lazy" decoding="async" alt="Locação com Suporte Técnico" class="w-full h-full object-cover" width="800" height="480">
+                        <img src="manutencao.jpg" loading="lazy" decoding="async" alt="Locação com Suporte Técnico" class="w-full h-full object-cover" width="800" height="480" data-webp="manutencao.webp">
                         <div class="overlay" role="dialog" aria-hidden="true">
                             <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
@@ -673,7 +673,7 @@
                 
                     <div class="lg:w-1/2 relative">
                     <div class="bg-transparent overflow-visible">
-                    <img src="box.gif" alt="Equipe Supplies" class="w-full h-auto object-cover" style="border:0;box-shadow:none;border-radius:0;" loading="lazy" decoding="async" width="960" height="540">
+                    <img src="box.gif" alt="Equipe Supplies" class="w-full h-auto object-cover" style="border:0;box-shadow:none;border-radius:0;" loading="lazy" decoding="async" width="960" height="540" data-webp="box.webp">
                     </div>
                     
                     <div class="absolute -bottom-8 -left-8 bg-white soften-card p-6 rounded-xl shadow-lg hidden md:block">
@@ -694,7 +694,7 @@
 
     <!-- Testimonials Section -->
     <section class="py-12 bg-gray-900 text-white relative overflow-hidden">
-        <img src="final.gif" alt="" aria-hidden="true" class="testimonial-bg" loading="lazy" decoding="async" width="1400" height="600">
+        <img src="final.gif" alt="" aria-hidden="true" class="testimonial-bg" loading="lazy" decoding="async" width="1400" height="600" data-webp="final.webp">
         <div class="container mx-auto px-4 relative z-10">
                 <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">O que dizem <span class="text-gray-400">nossos clientes</span></h2>
@@ -1308,6 +1308,35 @@ if ('serviceWorker' in navigator) {
       console.log('ServiceWorker falhou:', err);
     });
   });
+}
+</script>
+<!-- WebP runtime enhancement: detecta suporte e troca imagens por .webp se os arquivos existirem -->
+<script>
+// Teste rápido de suporte a WebP via canvas
+function supportsWebP() {
+    try {
+        var cvs = document.createElement('canvas');
+        if (!cvs.getContext) return false;
+        return cvs.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    } catch (e) { return false; }
+}
+
+if (supportsWebP()) {
+    // Para cada imagem com data-webp, tentamos um HEAD para verificar existência e então substituímos o src
+    document.addEventListener('DOMContentLoaded', function(){
+        const imgs = Array.from(document.querySelectorAll('img[data-webp]'));
+        imgs.forEach(img => {
+            const webp = img.getAttribute('data-webp');
+            if(!webp) return;
+            // Faz um fetch HEAD para checar se o arquivo está disponível (menor custo que GET)
+            fetch(webp, { method: 'HEAD', cache: 'no-cache' }).then(res => {
+                if(res && res.ok){
+                    // substitui a imagem, preservando atributos importantes
+                    img.src = webp;
+                }
+            }).catch(()=>{/* silencioso: mantemos o fallback original */});
+        });
+    });
 }
 </script>
 </body>
