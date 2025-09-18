@@ -12,11 +12,17 @@
     <meta property="og:type" content="website">
     <title>Supplies - Locação de Impressoras Samsung</title>
     <!-- Tailwind compilado localmente -->
-    <link href="dist/styles.css" rel="stylesheet">
+    <!-- Preload local CSS to improve FCP, then apply as stylesheet via onload. noscript fallback keeps behavior for JS-disabled clients. -->
+    <link rel="preload" href="dist/styles.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link href="dist/styles.css" rel="stylesheet"></noscript>
     <!-- CDN backup (comentado): <script src="https://cdn.tailwindcss.com"></script> -->
     <!-- favicon original mantido como backup: favicon.svg -->
     <link rel="icon" href="favicon-s.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Preload Font Awesome to reduce render-blocking and improve FCP -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Preconnect to CDN to speed up font/css requests -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <style>
     :root { --vh: 1vh; }
     /* Global fixes to avoid mobile overflow/white stripe */
@@ -461,7 +467,10 @@
     <!-- Hero Section -->
     <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
         <!-- Hero background image (behind particles and content) -->
-        <img src="boll.gif" alt="Background" aria-hidden="true" class="hero-bg-image" loading="lazy">
+        <!-- Hero background: use the existing GIF directly so it always appears; keep decoding/loading attributes -->
+    <img src="boll.gif" alt="Background" aria-hidden="true" class="hero-bg-image" loading="eager" decoding="async" width="1600" height="900" fetchpriority="high">
+    <!-- Preload hero image to prioritize LCP candidate (safe because hero is visible immediately) -->
+    <link rel="preload" as="image" href="boll.gif">
         <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="container mx-auto px-4 z-10 relative">
         <!-- caixa preta removida: manter padding e alinhamento, legibilidade via text-shadow -->
@@ -496,8 +505,7 @@
                 <!-- Service 1 -->
                 <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
                     <div class="relative h-48 overflow-hidden">
-                    <img src="m4020.jpg" loading="lazy"
-                        alt="Impressora Samsung M4020" class="w-full h-full object-cover">
+                    <img src="m4020.jpg" loading="lazy" decoding="async" alt="Impressora Samsung M4020" class="w-full h-full object-cover" width="800" height="480">
                         <div class="overlay" role="dialog" aria-hidden="true">
                                     <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4020." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
@@ -521,8 +529,7 @@
                 <!-- Service 2 -->
                 <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
                     <div class="relative h-48 overflow-hidden">
-                    <img src="m4070.jpg" loading="lazy"
-                        alt="Impressora Samsung M4070" class="w-full h-full object-cover">
+                    <img src="m4070.jpg" loading="lazy" decoding="async" alt="Impressora Samsung M4070" class="w-full h-full object-cover" width="800" height="480">
                         <div class="overlay" role="dialog" aria-hidden="true">
                             <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20loca%C3%A7%C3%A3o%20da%20Samsung%20M4070." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
@@ -546,8 +553,7 @@
                 <!-- Service 3 -->
                 <div class="service-card bg-gray-50 soften-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="manutencao.jpg" loading="lazy"
-                             alt="Locação com Suporte Técnico" class="w-full h-full object-cover">
+                        <img src="manutencao.jpg" loading="lazy" decoding="async" alt="Locação com Suporte Técnico" class="w-full h-full object-cover" width="800" height="480">
                         <div class="overlay" role="dialog" aria-hidden="true">
                             <a href="https://wa.me/553196456583?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos%20de%20loca%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-full inline-block transition">
                                 Saiba Mais
@@ -667,8 +673,7 @@
                 
                     <div class="lg:w-1/2 relative">
                     <div class="bg-transparent overflow-visible">
-                    <img src="box.gif" 
-                        alt="Equipe Supplies" class="w-full h-auto object-cover" style="border:0;box-shadow:none;border-radius:0;">
+                    <img src="box.gif" alt="Equipe Supplies" class="w-full h-auto object-cover" style="border:0;box-shadow:none;border-radius:0;" loading="lazy" decoding="async" width="960" height="540">
                     </div>
                     
                     <div class="absolute -bottom-8 -left-8 bg-white soften-card p-6 rounded-xl shadow-lg hidden md:block">
@@ -689,7 +694,7 @@
 
     <!-- Testimonials Section -->
     <section class="py-12 bg-gray-900 text-white relative overflow-hidden">
-        <img src="final.gif" alt="" aria-hidden="true" class="testimonial-bg">
+        <img src="final.gif" alt="" aria-hidden="true" class="testimonial-bg" loading="lazy" decoding="async" width="1400" height="600">
         <div class="container mx-auto px-4 relative z-10">
                 <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">O que dizem <span class="text-gray-400">nossos clientes</span></h2>
@@ -712,7 +717,7 @@
                     <p class="text-gray-300 mb-6 italic">"Contratamos a locação de uma Samsung M4020 com suporte incluso e o atendimento da Supplies foi excelente. A solução manteve nossa operação sem interrupções."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                            <img src="m4020.jpg" alt="Cliente" class="w-full h-full object-cover">
+                            <img src="m4020.jpg" alt="Cliente" class="w-full h-full object-cover" loading="lazy" decoding="async" width="48" height="48">
                         </div>
                         <div>
                             <h4 class="font-bold">Carlos Silva</h4>
@@ -735,7 +740,7 @@
                     <p class="text-gray-300 mb-6 italic">"Comprei toner compatível para minha M4070 e estou muito satisfeita. A qualidade da impressão é ótima e o preço muito abaixo do mercado. Recomendo a Supplies para todos que precisam de produtos para impressora."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                            <img src="m4070.jpg" alt="Cliente" class="w-full h-full object-cover">
+                            <img src="m4070.jpg" alt="Cliente" class="w-full h-full object-cover" loading="lazy" decoding="async" width="48" height="48">
                         </div>
                         <div>
                             <h4 class="font-bold">Ana Oliveira</h4>
@@ -758,7 +763,7 @@
                     <p class="text-gray-300 mb-6 italic">"Contratamos a locação e o suporte técnico para nossas 5 impressoras M4020 e foi a melhor decisão. Reduzimos em 80% os problemas que tínhamos antes. Equipe muito profissional e atenciosa."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                            <img src="manutencao.jpg" alt="Cliente" class="w-full h-full object-cover">
+                            <img src="manutencao.jpg" alt="Cliente" class="w-full h-full object-cover" loading="lazy" decoding="async" width="48" height="48">
                         </div>
                         <div>
                             <h4 class="font-bold">Roberto Santos</h4>
@@ -1126,9 +1131,6 @@
             }, {passive:false});
         });
     })();
-    // ...existing code...
-    </script>
-    <script>
     // Hero down-arrow explicit smooth-scroll handler (useful if default anchor behavior is prevented)
     (function(){
         const down = document.getElementById('hero-down');
@@ -1295,5 +1297,18 @@
         draw();
     })();
     </script>
+    <!-- Service Worker registration (optional, improves cache and repeat visit speed) -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(reg) {
+      // registration succeeded
+      console.log('ServiceWorker registrado com escopo:', reg.scope);
+    }).catch(function(err) {
+      console.log('ServiceWorker falhou:', err);
+    });
+  });
+}
+</script>
 </body>
 </html>
