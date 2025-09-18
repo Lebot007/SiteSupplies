@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Supplies icon">
-  <rect width="64" height="64" fill="transparent"/>
-  <!-- white circle background -->
-  <circle cx="32" cy="32" r="30" fill="#ffffff"/>
-  <!-- Black 'S' centered -->
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="36" fill="#111827">S</text>
-</svg>
